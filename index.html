@@ -637,7 +637,7 @@ renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(35,1,0.1,100);
 camera.position.set(0,0,22);
-camera.lookAt(0,10,0);
+camera.lookAt(0,11,0);
 
 // ---- Lighting ----
 const ambient=new THREE.AmbientLight(0xffffff,2);
@@ -670,7 +670,7 @@ cursorBody.collisionFilterGroup=0;
 world.addBody(cursorBody);
 
 // ---- Chain constants ----
-const ANCHOR_Y=18;
+const ANCHOR_Y=20;
 const NUM_LINKS=11;
 const LINK_SPACING=0.7;
 const LINK_PIVOT=0.35;
@@ -779,7 +779,8 @@ const group=new THREE.Group();
 const inner=new THREE.Group();
 inner.add(model);
 // Move model so head (top) aligns with pivot
-model.position.set(-center.x,-center.y + pivotH,-center.z);
+// Hang from head: bbox.max.y is the top of the model
+model.position.set(-center.x,-bbox.max.y+4.5,-center.z);
 group.add(inner);
 scene.add(group);
 pendantMesh=group;
